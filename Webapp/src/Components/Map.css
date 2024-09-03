@@ -1,0 +1,39 @@
+#map {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100%;
+  cursor: grab;
+}
+
+#map:active {
+  cursor: grabbing;
+}
+
+#ol3d > div:first-of-type {
+  width: 50% !important;
+}
+
+.custom-mouse-position {
+  position: absolute;
+  z-index: 5000;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px;
+  border-radius: 5px;
+  color: black;
+  border: 1px solid #ccc;
+  bottom: 0;
+  margin: 10px;
+}
+
+.sidebyside {
+  display: "flex";
+  flex-direction: "row";
+  width: "100%";
+  height: "100vh";
+}
+
+#ol3d {
+  max-width: "50%";
+  height: "100%";
+}
