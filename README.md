@@ -62,7 +62,28 @@ pip install flask flask_cors shapely earthengine-api
 
 Ensure that your AWS credentials are set up for accessing S3 and Lambda services. You can configure this via .env file in both flask and react app's folders:
 
-### 5. Start the Backend (Flask App)
+### 5. .env and google json file
+
+Ensure you create .env file with aws credentials in Webapp before building. Also get your Google IAM json file from google console and place it inside python-gee folder. Append necessary variables in main.py at line 12 & 13 with your file & account names. Enviroment files (.env) should look like this:
+
+```
+VITE_AWS_ACCESS_KEY_ID=AWS ACCESS KEY
+VITE_AWS_SECRET_ACCESS_KEY=AWS ACCESS SECRET
+VITE_AWS_REGION= AWS REGFION
+VITE_AWS_BUCKET_NAME= AWS S3 Bucket
+```
+Lines to change in main.py inside python-gee folder:
+
+```
+service_account = 'SERVICE ACCOUNT ID ending like iam.serviceaccount.com'
+credentials = ee.ServiceAccountCredentials(service_account, 'IAM JSON file downloaded from google')
+ee.Initialize(credentials)
+
+```
+
+Also, depending on your windows or linux based enviroment, adjust the PotreeConverter path inside python-gee folder.
+
+### 6. Start the Backend (Flask App)
 
 While in the `python-gee` directory, start the Flask server:
 
@@ -72,7 +93,7 @@ python main.py
 
 The Flask app will be running at `http://localhost:5000` by default.
 
-### 6. Start the Frontend (React App)
+### 7. Start the Frontend (React App)
 
 In a new terminal window, navigate to the `frontend` directory and start the React development server:
 
@@ -83,9 +104,13 @@ npm run dev
 
 The React app will be running at `http://localhost:5173` by default.
 
-### 7. Access the Application
+### 8. Access the Application
 
 Open your browser and navigate to `http://localhost:5173` to interact with the full application.
+
+### 8. Rverse proxy flask app to avoid CORS issues
+
+You can use apache reverse proxy to avoid CORS errors.
 
 ## Usage
 
@@ -121,13 +146,14 @@ Feel free to explore and modify the code to fit your specific requirements.
 ```
 gis-openlayers-demo/
 ├── python-gee/              # Flask app for Earth Engine API and AWS integration
-│   ├── app.py               # Main Flask app script
-│   ├── requirements.txt     # Backend dependencies
+│   ├── main.py               # Main Flask app script
+│   ├── ....json             # JSON IAM File
 │   └── ...                  # Additional backend modules and configurations
 ├── Webapp/                # React app for GIS OpenLayers demo
 │   ├── public/              # Static files
 │   ├── src/                 # Source files (components, styles, etc.)
 │   ├── package.json         # Frontend dependencies
+│   ├── .env                 # Enviroment File
 │   └── ...                  # Additional frontend configurations
 ├── README.md                # This README file
 └── ...                      # Other configuration and documentation files
