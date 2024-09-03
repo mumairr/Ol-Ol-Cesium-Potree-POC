@@ -110,7 +110,15 @@ Open your browser and navigate to `http://localhost:5173` to interact with the f
 
 ### 8. Rverse proxy flask app to avoid CORS issues
 
-You can use apache reverse proxy to avoid CORS errors.
+You can use apache reverse proxy to avoid CORS errors. If you want to use reverse proxy, append url for flask in map.jsx at two places like below. Replace
+
+```
+http://localhost:5000/api/upload
+```
+with
+```
+../api/upload
+```
 
 ## Usage
 
